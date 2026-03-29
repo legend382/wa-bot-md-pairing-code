@@ -1,36 +1,19 @@
-/*
- * Information
- * Creator / Developer: Dani Ramdani (Dani Techno.) - FullStack Engineer
- * Contact creator / Developer: 0895 1254 5999 (WhatsApp), contact@danitechno.com (Email)
-*/
-
-/* Thanks to
- * Dani Techno. - FullStack Engineer (Creator / Developer)
- * daniapi.biz.id (API provider)
- * api.caliph.biz.id (API provider)
- * @danitech/scraper (Scraper provider)
- * @whiskeysockets/baileys (Library "Baileys" provider)
- * @adiwajshing/keyed-db
- * @hapi/boom
- * pino
- * qrcode-terminal
- * chalk
- * mongoose
- * node-cron
- * nodemon
- * other
-*/
-
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 
-const config = require('../config/settings.js');
+// সরাসরি আপনার ডাটাবেস লিঙ্কটি এখানে বসিয়ে দেওয়া হলো
+const uri = "mongodb+srv://clipformoneyapk_db_user:ws1hiZCkrwr5JBoo@cluster0.ia72zn0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 let db = mongoose.connection;
 
-mongoose.connect(config.mongodb_uri, {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
+});
+
+// কানেকশন সাকসেস হলে মেসেজ দেখাবে
+db.once('open', () => {
+    console.log(chalk.green('Database connected successfully!'));
 });
 
 module.exports = db;
